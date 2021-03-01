@@ -5,12 +5,12 @@ import 'package:odisend/services/googleSingInProvider.dart';
 import 'package:odisend/signIn.dart';
 import 'package:provider/provider.dart';
 
-class Home extends StatefulWidget {
+class Access extends StatefulWidget {
   @override
-  _HomeState createState() => _HomeState();
+  _AccessState createState() => _AccessState();
 }
 
-class _HomeState extends State<Home> {
+class _AccessState extends State<Access> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,10 +22,8 @@ class _HomeState extends State<Home> {
 
             final provider = Provider.of<GoogleSignInProvider>(context);
 
-            if(provider.signedIn) {
-              return Center(child: CircularProgressIndicator());
-            } else if (snapshot.hasData) {
-              return HomeX();
+            if (snapshot.hasData) {
+              return Home(provider: provider);
             } else {
               return SignIn();
             }

@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:odisend/models/order.dart';
+import 'package:odisend/pages/profile_details.dart';
+import 'package:odisend/services/googleSingInProvider.dart';
 import 'package:odisend/widgets/widgets.dart';
 
-class HomeX extends StatefulWidget {
-  @override _HomeXState createState() => _HomeXState();
+class Home extends StatefulWidget {
+  Home({GoogleSignInProvider provider}) : googleProvider = provider;
+
+  GoogleSignInProvider googleProvider;
+
+  @override _HomeState createState() => _HomeState();
 }
 
-class _HomeXState extends State<HomeX> {
+class _HomeState extends State<Home> {
 
   List<Order> orders = [
     Order(id: 1, address: "C Barcelona 1", destinatary: "Sr Pepe", distance: .75),
@@ -29,7 +35,15 @@ class _HomeXState extends State<HomeX> {
     return Scaffold(
       appBar: AppBar(
         title: Text("PACKET TRACER"),
-        actions: [ProfileButton()],
+        actions: [
+          IconButton(
+            icon: Icon(Icons.person),
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => ProfileDetails(provider: widget.googleProvider)));
+            }
+          ),
+        ],
       ),
       body: RefreshIndicator(
         onRefresh: _pullRefresh,

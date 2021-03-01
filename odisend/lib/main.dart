@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:odisend/home.dart';
+import 'package:odisend/access.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:odisend/pages/home.dart';
 
@@ -28,8 +28,8 @@ class OdisendApp extends StatelessWidget {
 
       initialRoute: "/",
       routes: {
-        "/": (BuildContext context) => Home(),
-        "/homex": (BuildContext context) => HomeX(),
+        "/": (BuildContext context) => Access(),
+        "/home": (BuildContext context) => Home(),
       }
     );
   }

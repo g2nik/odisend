@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:odisend/models/profile.dart';
-import 'package:odisend/widgets/widgets.dart';
+import 'package:odisend/services/googleSingInProvider.dart';
+import 'package:provider/provider.dart';
 
 class ProfileDetails extends StatefulWidget {
-  //ProfileDetails(this.profile);
-  //final Profile profile;
+  ProfileDetails({GoogleSignInProvider provider}) : googleProvider = provider;
+
+  GoogleSignInProvider googleProvider;
 
   @override _ProfileDetailsState createState() => _ProfileDetailsState();
 }
@@ -41,6 +42,17 @@ class _ProfileDetailsState extends State<ProfileDetails> {
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 20),
           ),
+          FlatButton(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(25),
+            side: BorderSide(color: Colors.cyan, width: 3)
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+          child: Text("Sign Out"),
+          onPressed: () {
+            widget.googleProvider.logOut();
+            Navigator.pop(context);
+          }),
         ],
       ),
     );
