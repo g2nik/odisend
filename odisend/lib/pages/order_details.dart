@@ -14,9 +14,6 @@ class _OrderDetailsState extends State<OrderDetails> {
     return Scaffold(
       appBar: AppBar(
         title: Text("ORDER DETAILS"),
-        actions: [
-          ProfileButton(),
-        ],
       ),
       body: ListView(
         children: [
@@ -28,22 +25,22 @@ class _OrderDetailsState extends State<OrderDetails> {
           ),
           SizedBox(height: MediaQuery.of(context).size.height / 30),
           Text(
-            widget.order.address,
+            widget.order.direction_Pickup,
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 30),
           ),
           SizedBox(height: MediaQuery.of(context).size.height / 40),
           Text(
-            widget.order.destinatary,
+            "${widget.order.userId}",
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 20),
           ),
           SizedBox(height: MediaQuery.of(context).size.height / 40),
-          Text(
-            "${widget.order.distance} KM",
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 20),
-          ),
+          // Text(
+          //   "${widget.order.distance} KM",
+          //   textAlign: TextAlign.center,
+          //   style: TextStyle(fontSize: 20),
+          // ),
         ],
       ),
       floatingActionButton: FloatingActionButton(

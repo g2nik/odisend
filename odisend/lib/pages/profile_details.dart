@@ -1,12 +1,11 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:odisend/services/googleSingInProvider.dart';
-import 'package:provider/provider.dart';
 
 class ProfileDetails extends StatefulWidget {
   ProfileDetails({GoogleSignInProvider provider}) : googleProvider = provider;
 
-  GoogleSignInProvider googleProvider;
+  final GoogleSignInProvider googleProvider;
 
   @override _ProfileDetailsState createState() => _ProfileDetailsState();
 }
@@ -63,7 +62,7 @@ class _ProfileDetailsState extends State<ProfileDetails> {
             child: Switch(
               value: AdaptiveTheme.of(context).mode == AdaptiveThemeMode.light,
               onChanged: (bool value) {
-                setState(() { AdaptiveTheme.of(context).toggleThemeMode(); });
+                setState(() => AdaptiveTheme.of(context).toggleThemeMode());
               },
             ),
           )

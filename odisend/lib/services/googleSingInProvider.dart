@@ -18,23 +18,26 @@ class GoogleSignInProvider extends ChangeNotifier {
   }
 
   Future logIn() async {
-    _signedIn = true;
+    try {
+      _signedIn = true;
+      final user = await googleSignIn.signIn();
 
-    final user = await googleSignIn.signIn();
+      if (user == null) {
+        _signedIn = false;
+        return;
+      } else {
+        final googleAuth = await user.authentication;
 
-    if (user == null) {
-      _signedIn = false;
-      return;
-    } else {
-      final googleAuth = await user.authentication;
+        final credential = GoogleAuthProvider.credential(
+          accessToken: googleAuth.accessToken,
+          idToken: googleAuth.idToken,
+        );
 
-      final credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth.accessToken,
-        idToken: googleAuth.idToken,
-      );
-
-      await FirebaseAuth.instance.signInWithCredential(credential);
-      _signedIn = false;
+        await FirebaseAuth.instance.signInWithCredential(credential);
+        _signedIn = false;
+      }
+    } catch (e) {
+      print("Error while logging in: $e");
     }
   }
 

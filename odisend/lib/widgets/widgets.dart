@@ -1,3 +1,4 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:odisend/models/order.dart';
 import 'package:odisend/pages/profile_details.dart';
@@ -23,13 +24,21 @@ class OrderCard extends StatelessWidget {
   final Order order;
   
   @override Widget build(BuildContext context) {
+    bool light = AdaptiveTheme.of(context).mode == AdaptiveThemeMode.light;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
       child: Card(
-        color: Colors.orangeAccent,
+        color: light ? Colors.orangeAccent : Colors.grey[700],
         child: ListTile(
-          title: Text(order.address),
-          trailing: Text("${order.distance} KM"),
+          title: Text(
+            order.direction_Pickup,
+            style: TextStyle(color: light ? Colors.black : Colors.orangeAccent)
+          ),
+          trailing: Text(
+            "11 KM",
+            style: TextStyle(color: light ? Colors.black : Colors.orangeAccent)
+          ),
           onTap: () {
             Navigator.of(context).push(MaterialPageRoute(builder: (context) => OrderDetails(order)));
           },

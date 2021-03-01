@@ -1,9 +1,22 @@
 class Order {
   int id;
-  String address;
-  String destinatary;
-  double distance;
+  String content;
+  String direction_Delivery;
+  String direction_Pickup;
+  int userId;
+  int riderId;
+  bool asigned;
+  String state;
 
-  Order({this.id, this.address, this.destinatary, this.distance});
+  fromJson(Map<String, dynamic> json) {
+    id = json["id"];
+    content = json["content"];
+    direction_Delivery = json["direction_Delivery"];
+    direction_Pickup = json["direction_Pickup"];
+    userId = json["userId"];
+    riderId = json["riderId"];
+    asigned = json["asigned"];
+    state = json["state"] ?? "N/A";
+  }
   
 }
