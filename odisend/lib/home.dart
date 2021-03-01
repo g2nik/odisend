@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:odisend/pages/home.dart';
 import 'package:odisend/services/googleSingInProvider.dart';
 import 'package:odisend/signIn.dart';
 import 'package:provider/provider.dart';
@@ -24,7 +25,7 @@ class _HomeState extends State<Home> {
             if(provider.signedIn) {
               return Center(child: CircularProgressIndicator());
             } else if (snapshot.hasData) {
-              return Center(child: Text("Welcome"));
+              return HomeX();
             } else {
               return SignIn();
             }

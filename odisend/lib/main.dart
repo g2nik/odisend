@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:odisend/home.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:odisend/pages/home.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,7 +26,11 @@ class OdisendApp extends StatelessWidget {
         primarySwatch: Colors.cyan,
       ),
 
-      home: Home(),
+      initialRoute: "/",
+      routes: {
+        "/": (BuildContext context) => Home(),
+        "/homex": (BuildContext context) => HomeX(),
+      }
     );
   }
 }
