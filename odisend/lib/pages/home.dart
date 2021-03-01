@@ -7,7 +7,7 @@ import 'package:odisend/widgets/widgets.dart';
 class Home extends StatefulWidget {
   Home({GoogleSignInProvider provider}) : googleProvider = provider;
 
-  GoogleSignInProvider googleProvider;
+  final GoogleSignInProvider googleProvider;
 
   @override _HomeState createState() => _HomeState();
 }
@@ -28,7 +28,7 @@ class _HomeState extends State<Home> {
   ];
 
   Future<void> _pullRefresh() async {
-    setState(() => orders.removeAt(9));
+    setState(() => orders.removeAt(orders.length - 1));
   }
   
   @override Widget build(BuildContext context) {

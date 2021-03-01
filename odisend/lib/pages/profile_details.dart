@@ -1,3 +1,4 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:odisend/services/googleSingInProvider.dart';
 import 'package:provider/provider.dart';
@@ -42,17 +43,30 @@ class _ProfileDetailsState extends State<ProfileDetails> {
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 20),
           ),
-          FlatButton(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(25),
-            side: BorderSide(color: Colors.cyan, width: 3)
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 75, vertical: 20),
+            child: FlatButton(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(50),
+              side: BorderSide(color: Colors.orange, width: 3)
+            ),
+            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+            child: Text("Sign Out"),
+            onPressed: () {
+              widget.googleProvider.logOut();
+              Navigator.pop(context);
+            }),
           ),
-          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-          child: Text("Sign Out"),
-          onPressed: () {
-            widget.googleProvider.logOut();
-            Navigator.pop(context);
-          }),
+
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 150, vertical: 20),
+            child: Switch(
+              value: AdaptiveTheme.of(context).mode == AdaptiveThemeMode.light,
+              onChanged: (bool value) {
+                setState(() { AdaptiveTheme.of(context).toggleThemeMode(); });
+              },
+            ),
+          )
         ],
       ),
     );

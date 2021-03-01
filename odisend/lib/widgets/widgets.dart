@@ -26,7 +26,7 @@ class OrderCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
       child: Card(
-        color: Colors.teal[300],
+        color: Colors.orangeAccent,
         child: ListTile(
           title: Text(order.address),
           trailing: Text("${order.distance} KM"),

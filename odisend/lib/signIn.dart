@@ -15,11 +15,11 @@ class _SignInState extends State<SignIn> {
       body: Center(
         child: FlatButton(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(25),
-            side: BorderSide(color: Colors.cyan, width: 3)
+            borderRadius: BorderRadius.circular(50),
+            side: BorderSide(color: Colors.orange, width: 3)
           ),
           padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-          child: Text("Sign In page"),
+          child: Text("Sign In", style: TextStyle(color: Colors.orange, fontSize: 20)),
           onPressed: () {
             try {
               final provider = Provider.of<GoogleSignInProvider>(context, listen: false);

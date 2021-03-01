@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:odisend/access.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:adaptive_theme/adaptive_theme.dart';
+import 'package:odisend/access.dart';
 import 'package:odisend/pages/home.dart';
 
 Future main() async {
@@ -12,25 +13,29 @@ Future main() async {
 class OdisendApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: "Odisend",
-
-      theme: ThemeData(
+    return AdaptiveTheme(
+      light: ThemeData(
         brightness: Brightness.light,
-        primarySwatch: Colors.cyan,
+        primarySwatch: Colors.orange,
+        accentColor: Colors.orangeAccent,
       ),
-
-      darkTheme: ThemeData(
+      dark: ThemeData(
         brightness: Brightness.dark,
-        primarySwatch: Colors.cyan,
+        primarySwatch: Colors.orange,
+        accentColor: Colors.orangeAccent,
       ),
-
-      initialRoute: "/",
-      routes: {
-        "/": (BuildContext context) => Access(),
-        "/home": (BuildContext context) => Home(),
-      }
+      initial: AdaptiveThemeMode.light,
+      builder: (theme, darkTheme) => MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: "Odisend",
+        theme: theme,
+        darkTheme: darkTheme,
+        initialRoute: "/",
+        routes: {
+          "/": (BuildContext context) => Access(),
+          "/home": (BuildContext context) => Home(),
+        }
+      )
     );
   }
 }
