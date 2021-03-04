@@ -4,6 +4,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 class GoogleSignInProvider extends ChangeNotifier {
   final googleSignIn = GoogleSignIn();
+  FirebaseAuth _auth;
   bool _signedIn;
 
   GoogleSignInProvider() {
@@ -33,12 +34,18 @@ class GoogleSignInProvider extends ChangeNotifier {
           idToken: googleAuth.idToken,
         );
 
-        await FirebaseAuth.instance.signInWithCredential(credential);
+        _auth = FirebaseAuth.instance;
+        await _auth.signInWithCredential(credential);
         _signedIn = false;
       }
     } catch (e) {
       print("Error while logging in: $e");
     }
+  }
+
+  String getUID() {
+    if (_auth == null) return "token random";
+    else {return _auth.currentUser.uid;}
   }
 
   void logOut() async {

@@ -8,15 +8,16 @@ class Order {
   bool asigned;
   String state;
 
-  fromJson(Map<String, dynamic> json) {
-    id = json["id"];
-    content = json["content"];
-    direction_Delivery = json["direction_Delivery"];
-    direction_Pickup = json["direction_Pickup"];
-    userId = json["userId"];
-    riderId = json["riderId"];
-    asigned = json["asigned"];
-    state = json["state"] ?? "N/A";
+  static Order fromJson(Map<String, dynamic> json) {
+    Order newOrder = Order();
+    newOrder.id = json["id"];
+    newOrder.content = json["content"];
+    newOrder.direction_Delivery = json["direction_Delivery"];
+    newOrder.direction_Pickup = json["direction_Pickup"];
+    newOrder.userId = json["userId"];
+    newOrder.riderId = json["riderId"];
+    newOrder.asigned = json["asigned"];
+    newOrder.state = json["state"] ?? "N/A";
+    return newOrder;
   }
-  
 }

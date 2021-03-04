@@ -7,7 +7,8 @@ class ProfileDetails extends StatefulWidget {
 
   final GoogleSignInProvider googleProvider;
 
-  @override _ProfileDetailsState createState() => _ProfileDetailsState();
+  @override
+  _ProfileDetailsState createState() => _ProfileDetailsState();
 }
 
 class _ProfileDetailsState extends State<ProfileDetails> {
@@ -18,29 +19,49 @@ class _ProfileDetailsState extends State<ProfileDetails> {
       ),
       body: ListView(
         children: [
-          SizedBox(height: MediaQuery.of(context).size.height / 30),
+          SizedBox(height: 30),
           Text(
             "USER ID",
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 30, color: Colors.grey, fontStyle: FontStyle.italic),
           ),
-          SizedBox(height: MediaQuery.of(context).size.height / 30),
+          SizedBox(height: 30),
           Text(
             "NAME",
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 30),
           ),
-          SizedBox(height: MediaQuery.of(context).size.height / 40),
+          SizedBox(height: 30),
           Text(
             "PASSWORD",
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 20),
           ),
-          SizedBox(height: MediaQuery.of(context).size.height / 40),
+          SizedBox(height: 30),
           Text(
             "VEHICLE",
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 20),
+          ),
+          SizedBox(height: 20),
+          Divider(),
+          SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "Dark Mode",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 30),
+              ),
+              Switch(
+                activeColor: Colors.orangeAccent,
+                value: AdaptiveTheme.of(context).mode != AdaptiveThemeMode.light,
+                onChanged: (bool value) {
+                  setState(() => AdaptiveTheme.of(context).toggleThemeMode());
+                },
+              ),
+            ],
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 75, vertical: 20),
@@ -56,16 +77,6 @@ class _ProfileDetailsState extends State<ProfileDetails> {
               Navigator.pop(context);
             }),
           ),
-
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 150, vertical: 20),
-            child: Switch(
-              value: AdaptiveTheme.of(context).mode == AdaptiveThemeMode.light,
-              onChanged: (bool value) {
-                setState(() => AdaptiveTheme.of(context).toggleThemeMode());
-              },
-            ),
-          )
         ],
       ),
     );

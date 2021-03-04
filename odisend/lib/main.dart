@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:odisend/access.dart';
-import 'package:odisend/pages/home.dart';
+import 'package:odisend/pages/orders.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,7 +33,7 @@ class OdisendApp extends StatelessWidget {
         initialRoute: "/",
         routes: {
           "/": (BuildContext context) => Access(),
-          "/home": (BuildContext context) => Home(),
+          "/home": (BuildContext context) => Orders(),
         }
       )
     );
