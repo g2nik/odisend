@@ -19,6 +19,18 @@ class API {
     return List<Order>.from(apiOrders.map((model)=> Order.fromJson(model)));
   }
 
+  Future<List<Order>> getGeneralOrders() async {
+    var orders = await getOrders();
+    orders.removeWhere((element) => element.asigned);
+    return orders;
+  }
+
+  Future<List<Order>> getAssignedOrders() async {
+    var orders = await getOrders();
+    orders.removeWhere((element) => element.riderId != 1);
+    return orders;
+  }
+
   Future uploadToken(int id, Map<String, dynamic> json) async {
     var response = await http.put(
       "http://g2teamsarria-001-site1.itempurl.com/api/users/$id",

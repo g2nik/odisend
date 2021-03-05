@@ -33,7 +33,7 @@ class OdisendApp extends StatelessWidget {
         initialRoute: "/",
         routes: {
           "/": (BuildContext context) => Access(),
-          "/home": (BuildContext context) => Orders(),
+          "/orders": (BuildContext context) => Orders(),
         }
       )
     );

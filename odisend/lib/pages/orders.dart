@@ -17,18 +17,25 @@ class Orders extends StatefulWidget {
 class _OrdersState extends State<Orders> with TickerProviderStateMixin {
 
   API api = API();
-  List<Order> orders = List();
+  List<Order> generalOrders = List();
+  List<Order> assignedOrders = List();
   TabController _tabController;
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(vsync: this, length: 2, initialIndex: 0);
-    _loadOrders();
+    _loadGeneralOrders();
+    _loadAssignedOrders();
   }
 
-  Future _loadOrders() async {
-    orders = await api.getOrders();
+  Future _loadGeneralOrders() async {
+    generalOrders = await api.getGeneralOrders();
+    setState(() {});
+  }
+
+  Future _loadAssignedOrders() async {
+    assignedOrders = await api.getAssignedOrders();
     setState(() {});
   }
   
@@ -36,6 +43,7 @@ class _OrdersState extends State<Orders> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text("PACKET TRACER"),
         actions: [
           IconButton(
@@ -75,20 +83,20 @@ class _OrdersState extends State<Orders> with TickerProviderStateMixin {
         children: [
 
           RefreshIndicator(
-            onRefresh: _loadOrders,
+            onRefresh: _loadGeneralOrders,
             child: ListView.builder(
               padding: const EdgeInsets.only(top: 30),
-              itemCount: orders.length,
-              itemBuilder: (context, index) => OrderCard(orders[index]),
+              itemCount: generalOrders.length,
+              itemBuilder: (context, index) => OrderCard(generalOrders[index]),
             ),
           ),
 
           RefreshIndicator(
-            onRefresh: _loadOrders,
+            onRefresh: _loadAssignedOrders,
             child: ListView.builder(
               padding: const EdgeInsets.only(top: 30),
-              itemCount: orders.length,
-              itemBuilder: (context, index) => OrderCard(orders[index]),
+              itemCount: assignedOrders.length,
+              itemBuilder: (context, index) => OrderCard(assignedOrders[index]),
             ),
           ),
 

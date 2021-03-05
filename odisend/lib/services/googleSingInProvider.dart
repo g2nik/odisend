@@ -1,17 +1,23 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:odisend/services/api.dart';
 
 class GoogleSignInProvider extends ChangeNotifier {
   final googleSignIn = GoogleSignIn();
-  FirebaseAuth _auth;
+  API api = API();
+  FirebaseAuth _auth = FirebaseAuth.instance;
   bool _signedIn;
+  String _uid;
 
   GoogleSignInProvider() {
     _signedIn = false;
+    _uid = "";
   }
 
   bool get signedIn => _signedIn;
+
+  String get uid => _uid;
 
   set signedIn(bool signedIn) {
     _signedIn = signedIn;
@@ -36,6 +42,7 @@ class GoogleSignInProvider extends ChangeNotifier {
 
         _auth = FirebaseAuth.instance;
         await _auth.signInWithCredential(credential);
+        _uid = _auth.currentUser.uid;
         _signedIn = false;
       }
     } catch (e) {
@@ -43,12 +50,12 @@ class GoogleSignInProvider extends ChangeNotifier {
     }
   }
 
-  String getUID() {
-    if (_auth == null) return "token random";
-    else {return _auth.currentUser.uid;}
+  Future<bool> isUIDValid() async {
+    await logIn();
+    return await api.tokenIsValid(_uid);
   }
 
-  void logOut() async {
+  Future logOut() async {
     try {
       await googleSignIn.disconnect();
       await FirebaseAuth.instance.signOut();
