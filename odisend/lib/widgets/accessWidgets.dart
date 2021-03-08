@@ -21,7 +21,7 @@ class AccessButton extends StatelessWidget {
       onPressed: () async {
         try {
           final provider = Provider.of<GoogleSignInProvider>(context, listen: false);
-          if (retry) await provider.logOut();
+          if (retry ?? true) await provider.logOut();
           provider.logIn();
         } catch (e) {
           print(e);
