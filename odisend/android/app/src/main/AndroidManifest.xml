@@ -3,6 +3,8 @@
    <application
         android:label="odisend"
         android:icon="@mipmap/ic_launcher">
+        <meta-data android:name="com.google.android.geo.API_KEY"
+          android:value="AIzaSyD6tLpNK5za4HNMsO_zq_a_Y6PN-EU6YqE"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

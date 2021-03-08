@@ -66,9 +66,9 @@ class _OrderDetailsState extends State<OrderDetails> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.map),
         onPressed: () {
-          // Navigator.of(context).push(
-          //   MaterialPageRoute(builder: (context) => Map()),
-          // );
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => Map()),
+          );
         },
       ),
     );
