@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:odisend/clases/user.dart';
+import 'package:odisend/models/user.dart';
 import '../widgets/form_box.dart';
 import 'package:http/http.dart' as http;
 

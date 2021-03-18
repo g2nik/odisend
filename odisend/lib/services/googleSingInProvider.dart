@@ -1,16 +1,23 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:odisend/services/api.dart';
 
 class GoogleSignInProvider extends ChangeNotifier {
   final googleSignIn = GoogleSignIn();
+  API api = API();
+  FirebaseAuth _auth = FirebaseAuth.instance;
   bool _signedIn;
+  String _uid;
 
   GoogleSignInProvider() {
     _signedIn = false;
+    _uid = "";
   }
 
   bool get signedIn => _signedIn;
+
+  String get uid => _uid;
 
   set signedIn(bool signedIn) {
     _signedIn = signedIn;
@@ -18,29 +25,43 @@ class GoogleSignInProvider extends ChangeNotifier {
   }
 
   Future logIn() async {
-    _signedIn = true;
+    try {
+      _signedIn = true;
+      final user = await googleSignIn.signIn();
 
-    final user = await googleSignIn.signIn();
+      if (user == null) {
+        _signedIn = false;
+        return;
+      } else {
+        final googleAuth = await user.authentication;
 
-    if (user == null) {
-      _signedIn = false;
-      return;
-    } else {
-      final googleAuth = await user.authentication;
+        final credential = GoogleAuthProvider.credential(
+          accessToken: googleAuth.accessToken,
+          idToken: googleAuth.idToken,
+        );
 
-      final credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth.accessToken,
-        idToken: googleAuth.idToken,
-      );
-
-      await FirebaseAuth.instance.signInWithCredential(credential);
-      _signedIn = false;
+        _auth = FirebaseAuth.instance;
+        await _auth.signInWithCredential(credential);
+        _uid = _auth.currentUser.uid;
+        _signedIn = false;
+      }
+    } catch (e) {
+      print("Error while logging in: $e");
     }
   }
 
-  void logOut() async {
-    await googleSignIn.disconnect();
-    await FirebaseAuth.instance.signOut();
-    //_signedIn = false;
+  Future<bool> isUIDValid() async {
+    await logIn();
+    return await api.tokenIsValid(_uid);
+  }
+
+  Future logOut() async {
+    try {
+      await googleSignIn.disconnect();
+      await FirebaseAuth.instance.signOut();
+      _signedIn = false;
+    } catch (e) {
+      print("Error while logging out: $e");
+    }
   }
 }

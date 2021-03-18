@@ -2,12 +2,16 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:odisend/clases/user.dart';
+import 'package:odisend/models/user.dart';
+import 'package:odisend/pages/orders.dart';
 String _password = "", _username = "";
-
+bool acces = false;
 class FormBox extends StatelessWidget {
+  BuildContext context;
+
   @override
   Widget build(BuildContext context) {
+    acces = false;
     return Container(
       height: 400,
       decoration: BoxDecoration(
@@ -22,9 +26,9 @@ class FormBox extends StatelessWidget {
       child: buildStack(context),
     );
   }
+  
 
-
-    Future<User> fetchAlbum() async {
+  Future<bool> fetchAlbum(BuildContext context) async {
   final response = await http.get('http://g2teamsarria-001-site1.itempurl.com/api/riders');
 
   if (response.statusCode == 200) {
@@ -32,16 +36,19 @@ class FormBox extends StatelessWidget {
       .map((item) => User.fromJson(item))
       .toList()
       .cast<User>();
-      debugPrint(_username);
       for (var item in users) {
-        if (item .name == _username) {
-          if(item.vehicle == _password){
-            debugPrint("USER OKK");
+        debugPrint(_username + "  ---  " + _password);
+        debugPrint(item.username + "  ---  " + item.passsword);
+        if (item.username == _username) {
+          if(item.passsword == _password){
+              Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => Orders(),
+                    ),
+                    ModalRoute.withName('/'));
           }
-        } else {
-          debugPrint("USER INVALID");
         }
-        debugPrint(item.toString());
       }
     // If the server did return a 200 OK response,
     // then parse the JSON.
@@ -51,6 +58,7 @@ class FormBox extends StatelessWidget {
     // then throw an exception.
     throw Exception('Failed to load album');
   }
+  return false;
 }
 
 
@@ -76,6 +84,7 @@ class FormBox extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(left: 10, right: 10),
               child: TextFormField(
+                style: TextStyle(color: Colors.black),
                 onChanged: (val) => _username = val,
                 cursorColor: Color.fromRGBO(166, 67, 70, 1),
                 decoration: InputDecoration(
@@ -89,6 +98,9 @@ class FormBox extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(left: 10, right: 10),
               child: TextFormField(
+                obscureText: true,
+                obscuringCharacter: "☻",
+                style: TextStyle(color: Colors.black),
                 onChanged: (val) => _password = val,
                 decoration: InputDecoration(
                     prefixIcon: Icon(Icons.security, color:Color.fromRGBO(166, 67, 70, 1)),
@@ -105,7 +117,7 @@ class FormBox extends StatelessWidget {
           top: 270,
           left: MediaQuery.of(context).size.width * .45,
           child: FloatingActionButton(
-            onPressed:() => {fetchAlbum()},
+            onPressed:() => (fetchAlbum(context)),
             heroTag: 'logintag',
             backgroundColor: Color.fromRGBO(166, 67, 70, 1),
             child: Icon(Icons.arrow_forward_ios),

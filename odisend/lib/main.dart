@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:odisend/home.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:odisend/splash.dart';
+import 'package:odisend/pages/splash.dart';
 
 
 Future main() async {
@@ -13,7 +12,7 @@ Future main() async {
 class OdisendApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp( 
       debugShowCheckedModeBanner: false,
       title: "Odisend",
 

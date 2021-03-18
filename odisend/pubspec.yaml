@@ -26,6 +26,8 @@ dependencies:
   firebase_auth: ^0.20.0+1
   google_sign_in: ^4.5.9
   provider: ^4.3.3
+  shared_preferences: ^0.5.12
+  adaptive_theme: ^1.1.0
   animated_text_kit: ^2.0.0
   font_awesome_flutter: ^8.4.0
   flutter_custom_clippers: ^0.1.6
@@ -38,6 +40,7 @@ dependencies:
   duration: ^2.0.11
   rect_getter: ^0.1.0
   http: ^0.12.2
+
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -82,6 +85,7 @@ flutter:
           weight: 500
         - asset: assets/fonts/Montserrat/Montserrat-Light.ttf
           weight: 300  
+
 
   # To add assets to your application, add an assets section, like this:
   # assets:
