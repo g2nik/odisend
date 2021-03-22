@@ -1,9 +1,6 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:odisend/models/user.dart';
+import 'package:odisend/widgets/access_widgets.dart';
 import '../widgets/form_box.dart';
-import 'package:http/http.dart' as http;
 
 
 class LoginPage extends StatefulWidget {
@@ -86,13 +83,13 @@ class _LoginPageState extends State<LoginPage>
                       child: FormBox(),
                     ),
                   ),
-                  SizedBox(
-                    height: 50,
-                    width: 2,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 75, vertical: 25),
+                    child: AccessButton(),
                   ),
+                  SizedBox(height: 50, width: 2),
                   Transform(
-                    transform: Matrix4.translationValues(
-                        0, animation3.value * _width, 0),
+                    transform: Matrix4.translationValues(0, animation3.value * _width, 0),
                     child: Text(
                       'Recuperar contraseña',
                       textAlign: TextAlign.center,
@@ -102,12 +99,11 @@ class _LoginPageState extends State<LoginPage>
                       ),
                     ),
                   ),
-                  SizedBox(height: 12),
-                  Transform(
-                    transform: Matrix4.translationValues(0, animation3.value * _height, 0),
-                    child: buildText(),
-                  ),
-                  SizedBox(height: 30),
+                  // Transform(
+                  //   transform: Matrix4.translationValues(0, animation3.value * _height, 0),
+                  //   child: buildText(),
+                  // ),
+                  // SizedBox(height: 30),
                 ],
               ),
             ),
@@ -115,29 +111,29 @@ class _LoginPageState extends State<LoginPage>
         });
   }
 
-  Widget buildText() {
-    return GestureDetector(
-      onTap: () {
-        print('go to signup form');
-        Navigator.pushNamed(context, '/signup');
-      },
-      child: Text.rich(
-        TextSpan(
-          text: '¿No tienes cuenta? ',
-          style: TextStyle(fontFamily: 'Quicksand'),
-          children: <TextSpan>[
-            TextSpan(
-                text: 'Regístrate',
-                style: TextStyle(
-                  fontFamily: 'Quicksand',
-                  fontWeight: FontWeight.bold,
-                  decoration: TextDecoration.underline,
-                )),
-            // can add more TextSpans here...
-          ],
-        ),
-        textAlign: TextAlign.center,
-      ),
-    );
-  }
+  // Widget buildText() {
+  //   return GestureDetector(
+  //     onTap: () {
+  //       print('go to signup form');
+  //       Navigator.pushNamed(context, '/signup');
+  //     },
+  //     child: Text.rich(
+  //       TextSpan(
+  //         text: '¿No tienes cuenta? ',
+  //         style: TextStyle(fontFamily: 'Quicksand'),
+  //         children: <TextSpan>[
+  //           TextSpan(
+  //               text: 'Regístrate',
+  //               style: TextStyle(
+  //                 fontFamily: 'Quicksand',
+  //                 fontWeight: FontWeight.bold,
+  //                 decoration: TextDecoration.underline,
+  //               )),
+  //           // can add more TextSpans here...
+  //         ],
+  //       ),
+  //       textAlign: TextAlign.center,
+  //     ),
+  //   );
+  // }
 }

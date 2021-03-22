@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:odisend/widgets/accessWidgets.dart';
+import 'package:odisend/pages/login_page.dart';
+import 'package:odisend/widgets/access_widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:odisend/services/googleSingInProvider.dart';
@@ -32,22 +33,23 @@ class _AccessState extends State<Access> {
                   if (snapshot.hasData) {
                     return snapshot.data
                     ? Orders(provider: signInProvider)
-                    : Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(32.0),
-                            child: Text(
-                              "Your account is not registered in our database",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 20),
-                            ),
-                          ),
-                          AccessButton(text: "Sign In again", retry: true)
-                        ]
-                      ),
-                    );
+                    : LoginPage();
+                    // : Center(
+                    //   child: Column(
+                    //     mainAxisAlignment: MainAxisAlignment.center,
+                    //     children: [
+                    //       Padding(
+                    //         padding: const EdgeInsets.all(32.0),
+                    //         child: Text(
+                    //           "Your account is not registered in our database",
+                    //           textAlign: TextAlign.center,
+                    //           style: TextStyle(fontSize: 20),
+                    //         ),
+                    //       ),
+                    //       AccessButton(text: "Sign In again", retry: true)
+                    //     ]
+                    //   ),
+                    // );
                   } else {
                     return Center(
                       child: CircularProgressIndicator()
@@ -56,7 +58,7 @@ class _AccessState extends State<Access> {
                 }
               );
             } else {
-              return Center(child: AccessButton());
+              return LoginPage();
             }
           }
         ),
