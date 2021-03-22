@@ -20,6 +20,7 @@ class _LoginPageState extends State<LoginPage>
       vsync: this,
       duration: Duration(seconds: 3),
     );
+    
     animation1 = Tween(begin: -1.0, end: 0).animate(CurvedAnimation(
         parent: animationController, curve: Curves.bounceInOut));
 
@@ -29,7 +30,7 @@ class _LoginPageState extends State<LoginPage>
 
     animation3 = Tween(begin: 1.0, end: 0).animate(CurvedAnimation(
         parent: animationController,
-        curve: Interval(.8, 1.0, curve: Curves.fastOutSlowIn)));
+        curve: Interval(.4, 1.0, curve: Curves.fastOutSlowIn)));
   }
 
   @override
@@ -83,22 +84,26 @@ class _LoginPageState extends State<LoginPage>
                       child: FormBox(),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 75, vertical: 25),
-                    child: AccessButton(),
-                  ),
-                  SizedBox(height: 50, width: 2),
                   Transform(
-                    transform: Matrix4.translationValues(0, animation3.value * _width, 0),
-                    child: Text(
-                      'Recuperar contraseña',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontFamily: 'Quicksand',
-                        color: Colors.grey,
-                      ),
+                    transform: Matrix4.translationValues(0, animation3.value * _height, 0),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 75, vertical: 50),
+                      child: AccessButton(),
                     ),
                   ),
+                  
+                  // SizedBox(height: 50, width: 2),
+                  // Transform(
+                  //   transform: Matrix4.translationValues(0, animation3.value * _width, 0),
+                  //   child: Text(
+                  //     'Recuperar contraseña',
+                  //     textAlign: TextAlign.center,
+                  //     style: TextStyle(
+                  //       fontFamily: 'Quicksand',
+                  //       color: Colors.grey,
+                  //     ),
+                  //   ),
+                  // ),
                   // Transform(
                   //   transform: Matrix4.translationValues(0, animation3.value * _height, 0),
                   //   child: buildText(),

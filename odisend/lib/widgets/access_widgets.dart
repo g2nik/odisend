@@ -17,7 +17,7 @@ class AccessButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(50),
         side: BorderSide(color: Colors.orange, width: 3)
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [

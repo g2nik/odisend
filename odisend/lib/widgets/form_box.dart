@@ -115,6 +115,9 @@ class FormBox extends StatelessWidget {
           children: [
             ElevatedButton(
               style: ButtonStyle(
+                padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                  EdgeInsets.symmetric(horizontal: 50, vertical: 10)
+                ),
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(50),
@@ -124,12 +127,7 @@ class FormBox extends StatelessWidget {
               onPressed:() => (fetchRiders(context)),
               //heroTag: 'logintag',
               //backgroundColor: Color.fromRGBO(166, 67, 70, 1),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("Log In", style: TextStyle(color: Colors.white, fontSize: 20)),
-                ],
-              )
+              child: Text("Log In", style: TextStyle(color: Colors.white, fontSize: 20)),
             ),
           ],
         ),
