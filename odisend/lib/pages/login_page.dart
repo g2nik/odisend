@@ -12,6 +12,7 @@ class _LoginPageState extends State<LoginPage>
     with SingleTickerProviderStateMixin {
   AnimationController animationController;
   Animation animation1, animation2, animation3;
+  AccessButton accessButton = AccessButton();
 
   @override
   void initState() {
@@ -43,18 +44,18 @@ class _LoginPageState extends State<LoginPage>
         builder: (BuildContext context, Widget child) {
           return Scaffold(
             body: Container(
-               width: double.infinity,
-               height: double.infinity,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            colors: [
-              Colors.orange[400],
-              Colors.orange[300],
-              Color.fromRGBO(250, 214, 165, 1),
-            ]
-          )
-        ),
+              width: double.infinity,
+              height: double.infinity,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  colors: [
+                    Colors.orange[400],
+                    Colors.orange[300],
+                    Color.fromRGBO(250, 214, 165, 1),
+                  ]
+                )
+              ),
               child: ListView(
                 shrinkWrap: true,
                 children: <Widget>[
@@ -88,7 +89,7 @@ class _LoginPageState extends State<LoginPage>
                     transform: Matrix4.translationValues(0, animation3.value * _height, 0),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 75, vertical: 50),
-                      child: AccessButton(),
+                      child: accessButton,
                     ),
                   ),
                   

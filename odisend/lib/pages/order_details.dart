@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:odisend/models/order.dart';
+import 'package:odisend/widgets/map.dart';
 
 class OrderDetails extends StatefulWidget {
   OrderDetails(this.order);
@@ -64,7 +65,9 @@ class _OrderDetailsState extends State<OrderDetails> {
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.map),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).push(MaterialPageRoute(builder: (context) => OdisendMap(widget.order)));
+        },
       ),
     );
   }
