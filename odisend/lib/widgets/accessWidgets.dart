@@ -12,19 +12,12 @@ class AccessButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FlatButton(
-      color: Colors.white,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(50),
         side: BorderSide(color: Colors.orange, width: 3)
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Image.asset("assets/images/google.png", scale: 10),
-          Text(text ?? "Sign In with Google", style: TextStyle(color: Colors.orange, fontSize: 16)),
-        ],
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+      child: Text(text ?? "Sign In", style: TextStyle(color: Colors.orange, fontSize: 20)),
       onPressed: () async {
         try {
           final provider = Provider.of<GoogleSignInProvider>(context, listen: false);

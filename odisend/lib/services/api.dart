@@ -34,26 +34,8 @@ class API {
   Future uploadToken(int id, Map<String, dynamic> json) async {
     var response = await http.put(
       "http://g2teamsarria-001-site1.itempurl.com/api/users/$id",
-      headers: {"Content-Type": "application/json"},
+      headers: { "Content-Type" : "application/json"},
       body: jsonEncode(json),
     );
-  }
-
-  void takeOrder(Order order, int riderId) async {
-    var response = await http.put(
-      "http://g2teamsarria-001-site1.itempurl.com/api/tasks/${order.id}",
-      headers: {"Content-Type": "application/json"},
-      body: jsonEncode({
-        "id": order.id,
-        "direction_Delivery": order.direction_Delivery,
-        "direction_Pickup": order.direction_Pickup,
-        "content": order.content,
-        "userID": order.userId,
-        "riderID": riderId,
-        "asigned": true,
-        "state": order.state
-      })
-    );
-    print(jsonDecode(response.body));
   }
 }

@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:odisend/widgets/access_widgets.dart';
+import 'package:odisend/models/user.dart';
 import '../widgets/form_box.dart';
+import 'package:http/http.dart' as http;
 
 
 class LoginPage extends StatefulWidget {
@@ -12,7 +15,6 @@ class _LoginPageState extends State<LoginPage>
     with SingleTickerProviderStateMixin {
   AnimationController animationController;
   Animation animation1, animation2, animation3;
-  AccessButton accessButton = AccessButton();
 
   @override
   void initState() {
@@ -21,7 +23,6 @@ class _LoginPageState extends State<LoginPage>
       vsync: this,
       duration: Duration(seconds: 3),
     );
-    
     animation1 = Tween(begin: -1.0, end: 0).animate(CurvedAnimation(
         parent: animationController, curve: Curves.bounceInOut));
 
@@ -31,7 +32,7 @@ class _LoginPageState extends State<LoginPage>
 
     animation3 = Tween(begin: 1.0, end: 0).animate(CurvedAnimation(
         parent: animationController,
-        curve: Interval(.4, 1.0, curve: Curves.fastOutSlowIn)));
+        curve: Interval(.8, 1.0, curve: Curves.fastOutSlowIn)));
   }
 
   @override
@@ -44,18 +45,18 @@ class _LoginPageState extends State<LoginPage>
         builder: (BuildContext context, Widget child) {
           return Scaffold(
             body: Container(
-              width: double.infinity,
-              height: double.infinity,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  colors: [
-                    Colors.orange[400],
-                    Colors.orange[300],
-                    Color.fromRGBO(250, 214, 165, 1),
-                  ]
-                )
-              ),
+               width: double.infinity,
+               height: double.infinity,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            colors: [
+              Colors.orange[400],
+              Colors.orange[300],
+              Color.fromRGBO(250, 214, 165, 1),
+            ]
+          )
+        ),
               child: ListView(
                 shrinkWrap: true,
                 children: <Widget>[
@@ -85,31 +86,28 @@ class _LoginPageState extends State<LoginPage>
                       child: FormBox(),
                     ),
                   ),
+                  SizedBox(
+                    height: 50,
+                    width: 2,
+                  ),
                   Transform(
-                    transform: Matrix4.translationValues(0, animation3.value * _height, 0),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 75, vertical: 50),
-                      child: accessButton,
+                    transform: Matrix4.translationValues(
+                        0, animation3.value * _width, 0),
+                    child: Text(
+                      'Recuperar contraseña',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontFamily: 'Quicksand',
+                        color: Colors.grey,
+                      ),
                     ),
                   ),
-                  
-                  // SizedBox(height: 50, width: 2),
-                  // Transform(
-                  //   transform: Matrix4.translationValues(0, animation3.value * _width, 0),
-                  //   child: Text(
-                  //     'Recuperar contraseña',
-                  //     textAlign: TextAlign.center,
-                  //     style: TextStyle(
-                  //       fontFamily: 'Quicksand',
-                  //       color: Colors.grey,
-                  //     ),
-                  //   ),
-                  // ),
-                  // Transform(
-                  //   transform: Matrix4.translationValues(0, animation3.value * _height, 0),
-                  //   child: buildText(),
-                  // ),
-                  // SizedBox(height: 30),
+                  SizedBox(height: 12),
+                  Transform(
+                    transform: Matrix4.translationValues(0, animation3.value * _height, 0),
+                    child: buildText(),
+                  ),
+                  SizedBox(height: 30),
                 ],
               ),
             ),
@@ -117,29 +115,29 @@ class _LoginPageState extends State<LoginPage>
         });
   }
 
-  // Widget buildText() {
-  //   return GestureDetector(
-  //     onTap: () {
-  //       print('go to signup form');
-  //       Navigator.pushNamed(context, '/signup');
-  //     },
-  //     child: Text.rich(
-  //       TextSpan(
-  //         text: '¿No tienes cuenta? ',
-  //         style: TextStyle(fontFamily: 'Quicksand'),
-  //         children: <TextSpan>[
-  //           TextSpan(
-  //               text: 'Regístrate',
-  //               style: TextStyle(
-  //                 fontFamily: 'Quicksand',
-  //                 fontWeight: FontWeight.bold,
-  //                 decoration: TextDecoration.underline,
-  //               )),
-  //           // can add more TextSpans here...
-  //         ],
-  //       ),
-  //       textAlign: TextAlign.center,
-  //     ),
-  //   );
-  // }
+  Widget buildText() {
+    return GestureDetector(
+      onTap: () {
+        print('go to signup form');
+        Navigator.pushNamed(context, '/signup');
+      },
+      child: Text.rich(
+        TextSpan(
+          text: '¿No tienes cuenta? ',
+          style: TextStyle(fontFamily: 'Quicksand'),
+          children: <TextSpan>[
+            TextSpan(
+                text: 'Regístrate',
+                style: TextStyle(
+                  fontFamily: 'Quicksand',
+                  fontWeight: FontWeight.bold,
+                  decoration: TextDecoration.underline,
+                )),
+            // can add more TextSpans here...
+          ],
+        ),
+        textAlign: TextAlign.center,
+      ),
+    );
+  }
 }

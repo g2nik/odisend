@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:odisend/models/user.dart';
 import 'package:odisend/pages/orders.dart';
-import 'package:odisend/widgets/access_widgets.dart';
 String _password = "", _username = "";
 bool acces = false;
 class FormBox extends StatelessWidget {
@@ -14,6 +13,7 @@ class FormBox extends StatelessWidget {
   Widget build(BuildContext context) {
     acces = false;
     return Container(
+      height: 400,
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: <BoxShadow>[
@@ -28,7 +28,7 @@ class FormBox extends StatelessWidget {
   }
   
 
-  Future<bool> fetchRiders(BuildContext context) async {
+  Future<bool> fetchAlbum(BuildContext context) async {
   final response = await http.get('http://g2teamsarria-001-site1.itempurl.com/api/riders');
 
   if (response.statusCode == 200) {
@@ -41,9 +41,12 @@ class FormBox extends StatelessWidget {
         debugPrint(item.username + "  ---  " + item.passsword);
         if (item.username == _username) {
           if(item.passsword == _password){
-            Navigator.pushAndRemoveUntil(
-              context, MaterialPageRoute(builder: (BuildContext context) => Orders()),
-              ModalRoute.withName('/'));
+              Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => Orders(),
+                    ),
+                    ModalRoute.withName('/'));
           }
         }
       }
@@ -60,25 +63,24 @@ class FormBox extends StatelessWidget {
 
 
   Widget buildStack(BuildContext context) {
-    return Column(
+    return Stack(
       //overflow: Overflow.visible,
-      children: [
+      children: <Widget>[
         Container(color: Color.fromRGBO(166, 67, 70, 1), height: 5),
         Column(
-          children: [
-            SizedBox(height: 50),
+          children: <Widget>[
+            SizedBox(height: 35),
             Padding(
               padding: EdgeInsets.only(left: 7),
               child: Text(
                 'Inicia sesión',
                 style: TextStyle(
-                  color: Color.fromRGBO(166, 67, 70, 1),
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold
-                ),
+                    color: Color.fromRGBO(166, 67, 70, 1),
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold),
               ),
             ),
-            SizedBox(height: 30),
+            SizedBox(height: 25),
             Padding(
               padding: EdgeInsets.only(left: 10, right: 10),
               child: TextFormField(
@@ -92,7 +94,7 @@ class FormBox extends StatelessWidget {
                     fillColor: Colors.black),
               ),
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 30),
             Padding(
               padding: EdgeInsets.only(left: 10, right: 10),
               child: TextFormField(
@@ -109,27 +111,17 @@ class FormBox extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(height: 30),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-              style: ButtonStyle(
-                padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-                  EdgeInsets.symmetric(horizontal: 50, vertical: 10)
-                ),
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                )
-              ),
-              onPressed:() => (fetchRiders(context)),
-              //heroTag: 'logintag',
-              //backgroundColor: Color.fromRGBO(166, 67, 70, 1),
-              child: Text("Log In", style: TextStyle(color: Colors.white, fontSize: 20)),
-            ),
-          ],
+        Positioned(
+          // top: 280,
+          // left: 190,
+          top: 270,
+          left: MediaQuery.of(context).size.width * .45,
+          child: FloatingActionButton(
+            onPressed:() => (fetchAlbum(context)),
+            heroTag: 'logintag',
+            backgroundColor: Color.fromRGBO(166, 67, 70, 1),
+            child: Icon(Icons.arrow_forward_ios),
+          ),
         ),
       ],
     );
