@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:odisend/models/order.dart';
+import 'package:odisend/pages/scanner.dart';
+import 'package:odisend/services/api.dart';
 import 'package:odisend/widgets/map.dart';
+import 'package:http/http.dart' as http;
+
 
 class OrderDetails extends StatefulWidget {
   OrderDetails(this.order);
@@ -11,6 +15,10 @@ class OrderDetails extends StatefulWidget {
 }
 
 class _OrderDetailsState extends State<OrderDetails> {
+
+  bool delivered = false;
+  API api = API();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,6 +68,43 @@ class _OrderDetailsState extends State<OrderDetails> {
             "${widget.order.state}" ?? "N/A",
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 20),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 30),
+            child: FlatButton(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(50),
+                side: BorderSide(color: Colors.orange, width: 3)
+              ),
+              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 25),
+              child: Text("Take order", style: TextStyle(fontSize: 20)),
+              onPressed: () async {
+                api.takeOrder(widget.order, 1);
+              }
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 30),
+            child: FlatButton(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(50),
+                side: BorderSide(color: Colors.orange, width: 3)
+              ),
+              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 25),
+              child: Text("QR Scanner", style: TextStyle(fontSize: 20)),
+              onPressed: () async{
+                var result = await Navigator.push(context, MaterialPageRoute(builder: (context) => Scanner()));
+                setState(() {
+                  print("Result is = $result");
+                  delivered = true;
+                });
+              }
+            ),
+          ),
+          Text(
+            "Status: ${delivered ? "delivered" : "not delivered"}",
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 20)  
           ),
         ],
       ),

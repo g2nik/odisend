@@ -1,41 +1,33 @@
 {
   "project_info": {
-    "project_number": "908631883068",
-    "project_id": "odisend-3c57a",
-    "storage_bucket": "odisend-3c57a.appspot.com"
+    "project_number": "320573813193",
+    "project_id": "odisend-app",
+    "storage_bucket": "odisend-app.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:908631883068:android:59f7786370b477d105f239",
+        "mobilesdk_app_id": "1:320573813193:android:52151ae532c82a856eb818",
         "android_client_info": {
           "package_name": "com.example.odisend"
         }
       },
       "oauth_client": [
         {
-          "client_id": "908631883068-riaoqcfkqtc3b59a6o5ognllhied92el.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.odisend",
-            "certificate_hash": "f6b7bef6efbaa242f0b68ac33db4ebaad890ccd4"
-          }
-        },
-        {
-          "client_id": "908631883068-1e64a05k1cjjc2tnug0ngqmf0e5v5l3s.apps.googleusercontent.com",
+          "client_id": "320573813193-14jbdqb6hggge4ljo6addvnjir68ebvs.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyD6tLpNK5za4HNMsO_zq_a_Y6PN-EU6YqE"
+          "current_key": "AIzaSyBWrJpckABVWy6TQH1vZIl4reXSsZ85Muw"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "908631883068-1e64a05k1cjjc2tnug0ngqmf0e5v5l3s.apps.googleusercontent.com",
+              "client_id": "320573813193-14jbdqb6hggge4ljo6addvnjir68ebvs.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
