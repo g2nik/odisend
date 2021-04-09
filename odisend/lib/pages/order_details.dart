@@ -79,6 +79,7 @@ class _OrderDetailsState extends State<OrderDetails> {
               padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 25),
               child: Text("Take order", style: TextStyle(fontSize: 20)),
               onPressed: () async {
+                //widget.order.riderId = 1;
                 api.takeOrder(widget.order, 1);
               }
             ),

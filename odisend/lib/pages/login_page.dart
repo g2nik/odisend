@@ -8,8 +8,7 @@ class LoginPage extends StatefulWidget {
   _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage>
-    with SingleTickerProviderStateMixin {
+class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMixin {
   AnimationController animationController;
   Animation animation1, animation2, animation3;
   AccessButton accessButton = AccessButton();
@@ -92,54 +91,10 @@ class _LoginPageState extends State<LoginPage>
                       child: accessButton,
                     ),
                   ),
-                  
-                  // SizedBox(height: 50, width: 2),
-                  // Transform(
-                  //   transform: Matrix4.translationValues(0, animation3.value * _width, 0),
-                  //   child: Text(
-                  //     'Recuperar contraseña',
-                  //     textAlign: TextAlign.center,
-                  //     style: TextStyle(
-                  //       fontFamily: 'Quicksand',
-                  //       color: Colors.grey,
-                  //     ),
-                  //   ),
-                  // ),
-                  // Transform(
-                  //   transform: Matrix4.translationValues(0, animation3.value * _height, 0),
-                  //   child: buildText(),
-                  // ),
-                  // SizedBox(height: 30),
                 ],
               ),
             ),
           );
         });
   }
-
-  // Widget buildText() {
-  //   return GestureDetector(
-  //     onTap: () {
-  //       print('go to signup form');
-  //       Navigator.pushNamed(context, '/signup');
-  //     },
-  //     child: Text.rich(
-  //       TextSpan(
-  //         text: '¿No tienes cuenta? ',
-  //         style: TextStyle(fontFamily: 'Quicksand'),
-  //         children: <TextSpan>[
-  //           TextSpan(
-  //               text: 'Regístrate',
-  //               style: TextStyle(
-  //                 fontFamily: 'Quicksand',
-  //                 fontWeight: FontWeight.bold,
-  //                 decoration: TextDecoration.underline,
-  //               )),
-  //           // can add more TextSpans here...
-  //         ],
-  //       ),
-  //       textAlign: TextAlign.center,
-  //     ),
-  //   );
-  // }
 }

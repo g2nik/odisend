@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:odisend/services/api.dart';
+import 'package:odisend/services/preferences.dart';
 
 class GoogleSignInProvider extends ChangeNotifier {
   final googleSignIn = GoogleSignIn();
   API api = API();
+  Preferences _prefs = Preferences();
   FirebaseAuth _auth = FirebaseAuth.instance;
   bool _signedIn;
   String _uid;
@@ -52,6 +54,10 @@ class GoogleSignInProvider extends ChangeNotifier {
 
   Future<bool> isUIDValid() async {
     await logIn();
+    print("********************");
+    print(_uid);
+    int riderId = await api.getRiderId(_uid);
+    print("RIDER ID SET = $riderId");
     return await api.tokenIsValid(_uid);
   }
 

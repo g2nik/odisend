@@ -1,5 +1,7 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:odisend/pages/login_page.dart';
+import 'package:odisend/pages/splash.dart';
 import 'package:odisend/services/googleSingInProvider.dart';
 
 class ProfileDetails extends StatefulWidget {
@@ -73,8 +75,9 @@ class _ProfileDetailsState extends State<ProfileDetails> {
             padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
             child: Text("Sign Out"),
             onPressed: () {
-              widget.googleProvider.logOut();
+              if (widget.googleProvider != null) widget.googleProvider.logOut();
               Navigator.pop(context);
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()),);
             }),
           ),
         ],
