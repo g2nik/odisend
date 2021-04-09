@@ -32,7 +32,7 @@ class OrderCard extends StatelessWidget {
         color: light ? Colors.orangeAccent : Colors.grey[700],
         child: ListTile(
           title: Text(
-            order.direction_Pickup,
+            order.directionPickup,
             style: TextStyle(color: light ? Colors.black : Colors.orangeAccent)
           ),
           trailing: Text(

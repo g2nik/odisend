@@ -27,6 +27,11 @@ class _OrdersState extends State<Orders> with TickerProviderStateMixin {
     _tabController = TabController(vsync: this, length: 2, initialIndex: 0);
     _loadGeneralOrders();
     _loadAssignedOrders();
+    load();
+  }
+
+  Future load() async {
+
   }
 
   Future _loadGeneralOrders() async {

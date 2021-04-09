@@ -7,7 +7,6 @@ import 'package:odisend/services/preferences.dart';
 class GoogleSignInProvider extends ChangeNotifier {
   final googleSignIn = GoogleSignIn();
   API api = API();
-  Preferences _prefs = Preferences();
   FirebaseAuth _auth = FirebaseAuth.instance;
   bool _signedIn;
   String _uid;
@@ -36,12 +35,10 @@ class GoogleSignInProvider extends ChangeNotifier {
         return;
       } else {
         final googleAuth = await user.authentication;
-
         final credential = GoogleAuthProvider.credential(
           accessToken: googleAuth.accessToken,
           idToken: googleAuth.idToken,
         );
-
         _auth = FirebaseAuth.instance;
         await _auth.signInWithCredential(credential);
         _uid = _auth.currentUser.uid;
@@ -54,10 +51,7 @@ class GoogleSignInProvider extends ChangeNotifier {
 
   Future<bool> isUIDValid() async {
     await logIn();
-    print("********************");
-    print(_uid);
-    int riderId = await api.getRiderId(_uid);
-    print("RIDER ID SET = $riderId");
+    await api.getRiderIdGoogle(_uid);
     return await api.tokenIsValid(_uid);
   }
 

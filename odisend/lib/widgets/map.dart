@@ -27,25 +27,28 @@ class OdisendMap extends StatefulWidget {
     position = CameraPosition(zoom: 10, target: LatLng(41.41, 2.16));
     pickupLocation = LatLng(41.41693964567262, 2.1874414738691534);
     deliveryLocation = LatLng(41.37683964567262, 2.1264414738691534);
+    
+    pickupLocation = order.pickupLocation;
+    deliveryLocation = order.deliveryLocation;
 
     markers.add(
       Marker(
-        markerId: MarkerId("pickup"),
+        markerId: MarkerId("Pickup"),
         position: pickupLocation,
         infoWindow: InfoWindow(
-          title: "Pickup",
-          snippet: "A"
+          title: order.directionPickup,
+          snippet: "Pickup"
         )
       ),
     );
 
     markers.add(
       Marker(
-        markerId: MarkerId("delivery"),
+        markerId: MarkerId("Delivery"),
         position: deliveryLocation,
         infoWindow: InfoWindow(
-          title: "Delivery",
-          snippet: "A"
+          title: order.directionDelivery,
+          snippet: "Delivery"
         )
       ),
     );

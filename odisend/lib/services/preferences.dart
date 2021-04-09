@@ -1,10 +1,25 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Preferences {
+
   SharedPreferences _prefs;
 
+  Preferences() {
+    load();
+  }
+
   Future load() async {
-    SharedPreferences _prefs = await SharedPreferences.getInstance();
+    _prefs = await SharedPreferences.getInstance();
+  }
+
+  Future setSignedIn(bool value) async {
+    if (_prefs == null) await load();
+    _prefs.setBool("signedIn", value);
+  }
+  
+  Future<bool> getSignedIn() async {
+    if (_prefs == null) await load();
+    return _prefs.getBool("signedIn");
   }
 
   Future setToken(String value) async {
@@ -19,8 +34,6 @@ class Preferences {
 
   Future setRiderId(int value) async {
     if (_prefs == null) await load();
-    print("prefsss");
-    print(_prefs);
     _prefs.setInt("riderId", value);
   }
 
