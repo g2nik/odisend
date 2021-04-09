@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:odisend/widgets/accessWidgets.dart';
+import 'package:odisend/pages/login_page.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:odisend/services/googleSingInProvider.dart';
@@ -12,6 +12,7 @@ class Access extends StatefulWidget {
 
 class _AccessState extends State<Access> {
   GoogleSignInProvider signInProvider = GoogleSignInProvider();
+  LoginPage loginPage = LoginPage();
 
   @override
   Widget build(BuildContext context) {
@@ -22,32 +23,22 @@ class _AccessState extends State<Access> {
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {
 
-            //final provider = Provider.of<GoogleSignInProvider>(context);
-
             if (snapshot.hasData) {
 
               return FutureBuilder(
                 future: signInProvider.isUIDValid(),
                 builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
                   if (snapshot.hasData) {
-                    return snapshot.data
-                    ? Orders(provider: signInProvider)
-                    : Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(32.0),
-                            child: Text(
-                              "Your account is not registered in our database",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 20),
-                            ),
-                          ),
-                          AccessButton(text: "Sign In again", retry: true)
-                        ]
-                      ),
-                    );
+
+                    if (snapshot.data) {
+                      return Orders(provider: signInProvider);
+                    } else {
+                      signInProvider.logOut();
+                      return loginPage;
+                    }
+                    // return snapshot.data
+                    // ? Orders(provider: signInProvider)
+                    // : loginPage;
                   } else {
                     return Center(
                       child: CircularProgressIndicator()
@@ -56,7 +47,7 @@ class _AccessState extends State<Access> {
                 }
               );
             } else {
-              return Center(child: AccessButton());
+              return loginPage;
             }
           }
         ),

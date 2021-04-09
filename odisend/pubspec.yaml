@@ -40,6 +40,10 @@ dependencies:
   duration: ^2.0.11
   rect_getter: ^0.1.0
   http: ^0.12.2
+  google_maps_flutter: ^2.0.1
+  flutter_polyline_points: ^0.2.4
+  location: ^3.2.4
+  qr_code_scanner: ^0.4.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -63,6 +67,7 @@ flutter:
   assets:
     - assets/
     - assets/pics/
+    - assets/images/
   fonts:
     - family: Quicksand
       fonts:
@@ -84,13 +89,7 @@ flutter:
         - asset: assets/fonts/Montserrat/Montserrat-Medium.ttf
           weight: 500
         - asset: assets/fonts/Montserrat/Montserrat-Light.ttf
-          weight: 300  
-
-
-  # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+          weight: 300
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
