@@ -18,23 +18,26 @@ class Order {
   static Order fromJson(Map<String, dynamic> json) {
     Order newOrder = Order();
     newOrder.id = json["id"];
-    newOrder.content = json["content"];
     newOrder.directionDelivery = json["directionDelivery"];
     newOrder.directionPickup = json["directionPickup"];
+    newOrder.content = json["content"];
     newOrder.userId = json["userID"];
     newOrder.riderId = json["riderID"];
 
-    String pLat = json["LatPickup"];
-    String pLng = json["LngPickup"];
-    newOrder.pickupLocation = LatLng(double.tryParse(pLat), double.tryParse(pLng));
+    newOrder.tokenPickup = json["tokenPickup"];
+    newOrder.tokenDelivery = json["tokenDelivery"];
 
-    String dLat = json["LatDelivery"];
-    String dLng = json["LngDelivery"];
-    newOrder.deliveryLocation = LatLng(double.tryParse(dLat), double.tryParse(dLng));
+    String latPickup = json["latPickup"];
+    String lngPickup = json["lngPickup"];
+    newOrder.pickupLocation = LatLng(double.tryParse(latPickup), double.tryParse(lngPickup));
 
-    newOrder.km = json["KM"];
-    newOrder.kg = json["KG"];
-    newOrder.state = json["State"] ?? "N/A";
+    String latDelivery = json["latDelivery"];
+    String lngDelivery = json["lngDelivery"];
+    newOrder.deliveryLocation = LatLng(double.tryParse(latDelivery), double.tryParse(lngDelivery));
+
+    newOrder.km = json["km"];
+    newOrder.kg = json["kg"];
+    newOrder.state = json["state"] ?? "N/A";
     return newOrder;
   }
 }

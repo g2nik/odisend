@@ -45,11 +45,11 @@ class _OrderDetailsState extends State<OrderDetails> {
           Divider(),
 
           SizedBox(height: 20),
-          Text(
-            "${widget.order.userId}",
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 20),
-          ),
+          // Text(
+          //   "${widget.order.userId}",
+          //   textAlign: TextAlign.center,
+          //   style: TextStyle(fontSize: 20),
+          // ),
 
           SizedBox(height: 20),
           Text(
@@ -65,12 +65,13 @@ class _OrderDetailsState extends State<OrderDetails> {
           ),
           SizedBox(height: MediaQuery.of(context).size.height / 40),
           Text(
-            "${widget.order.state}" ?? "N/A",
+            "State: ${widget.order.state}" ?? "N/A",
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 20),
           ),
+          SizedBox(height: 20),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 30),
+            padding: const EdgeInsets.symmetric(horizontal: 100),
             child: FlatButton(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(50),
@@ -84,8 +85,9 @@ class _OrderDetailsState extends State<OrderDetails> {
               }
             ),
           ),
+          SizedBox(height: 20),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 30),
+            padding: const EdgeInsets.symmetric(horizontal: 100),
             child: FlatButton(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(50),
@@ -102,6 +104,7 @@ class _OrderDetailsState extends State<OrderDetails> {
               }
             ),
           ),
+          SizedBox(height: 20),
           Text(
             "Status: ${delivered ? "delivered" : "not delivered"}",
             textAlign: TextAlign.center,

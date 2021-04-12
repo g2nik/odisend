@@ -55,12 +55,14 @@ class API {
   
   Future<List<Order>> getOrders() async {
     var response = await http.get("http://g2teamsarria-001-site1.itempurl.com/api/tasks");
+    print(json.decode(response.body));
     Iterable apiOrders = json.decode(response.body);
     return List<Order>.from(apiOrders.map((model)=> Order.fromJson(model)));
   }
 
   Future<List<Order>> getGeneralOrders() async {
     var orders = await getOrders();
+    print("OK");
     orders.removeWhere((element) => element.riderId != 1);
     return orders;
   }
