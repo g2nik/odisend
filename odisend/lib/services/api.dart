@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:odisend/models/order.dart';
 import 'package:odisend/models/rider.dart';
@@ -64,13 +65,13 @@ class API {
     var orders = await getOrders();
     print("OK");
     orders.removeWhere((element) => element.riderId != 1);
-    orders.removeWhere((element) => element.state == "Delivered");
+    orders.removeWhere((element) => element.state == "Assigned");
     return orders;
   }
 
   Future<List<Order>> getAssignedOrders() async {
     int riderId = await _prefs.getRiderId();
-    var orders = await getOrders();;
+    var orders = await getOrders();
     orders.removeWhere((element) => element.riderId != riderId ?? 1);
     orders.removeWhere((element) => element.state == "Delivered");
     return orders;
@@ -84,8 +85,23 @@ class API {
     );
   }
 
-  void takeOrder(Order order) async {
+  Future<bool> loginEmail(String username, String password) async {
+    var response = await http.get("http://g2teamsarria-001-site1.itempurl.com/api/riders");
+    Iterable apiRiders = json.decode(response.body);
+    var riders = List<Rider>.from(apiRiders.map((model) => Rider.fromJson(model)));
+    for (Rider r in riders) {
+      if (username == r.login && password == r.passsword) {
+        _prefs.setRiderId(r.id);
+        _prefs.setSignedIn(true);
+        return true;
+      }
+    }
+    return false;
+  }
+
+  void updateOrder(Order order) async {
     int riderId = await _prefs.getRiderId();
+    debugPrint(riderId.toString());
     var response = await http.put(
       "http://g2teamsarria-001-site1.itempurl.com/api/tasks/${order.id}",
       headers: {"Content-Type": "application/json"},
@@ -100,15 +116,15 @@ class API {
         
         "tokenPickup": order.tokenPickup,
         "tokenDelivery": order.tokenDelivery,
-        "lngPickup": order.pickupLocation.longitude,
-        "latPickup": order.pickupLocation.latitude,
-        "lngDelivery":order.deliveryLocation.longitude,
-        "latDelivery": order.deliveryLocation.latitude,
+        "lngPickup": order.pickupLocation.longitude.toString(),
+        "latPickup": order.pickupLocation.latitude.toString(),
+        "lngDelivery":order.deliveryLocation.longitude.toString(),
+        "latDelivery": order.deliveryLocation.latitude.toString(),
         "km": order.km,
         "kg": order.kg,
         "state": order.state
       })
     );
-    print(jsonDecode(response.body));
+    print(response.body);
   }
 }

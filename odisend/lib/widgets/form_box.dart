@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:odisend/models/user.dart';
 import 'package:odisend/pages/orders.dart';
+import 'package:odisend/services/api.dart';
 import 'package:odisend/widgets/access_widgets.dart';
 String _password = "", _username = "";
 bool acces = false;
@@ -124,7 +125,15 @@ class FormBox extends StatelessWidget {
                   ),
                 )
               ),
-              onPressed:() => (fetchRiders(context)),
+              onPressed:() async {
+                API api = API();
+                bool ok = await api.loginEmail(_username, _password);
+                if (ok) {
+                    Navigator.pushAndRemoveUntil(
+              context, MaterialPageRoute(builder: (BuildContext context) => Orders()),
+              ModalRoute.withName('/'));
+                }
+              },
               //heroTag: 'logintag',
               //backgroundColor: Color.fromRGBO(166, 67, 70, 1),
               child: Text("Log In", style: TextStyle(color: Colors.white, fontSize: 20)),

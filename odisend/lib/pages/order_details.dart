@@ -78,10 +78,11 @@ class _OrderDetailsState extends State<OrderDetails> {
                 side: BorderSide(color: Colors.orange, width: 3)
               ),
               padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 25),
-              child: Text("Take order", style: TextStyle(fontSize: 20)),
+              child: Text("Update order", style: TextStyle(fontSize: 20)),
               onPressed: () async {
                 widget.order.state = "Assigned";
-                api.takeOrder(widget.order);
+               api.updateOrder(widget.order);
+               setState(() {});
               }
             ),
           ),
@@ -96,19 +97,16 @@ class _OrderDetailsState extends State<OrderDetails> {
               padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 25),
               child: Text("QR Scanner", style: TextStyle(fontSize: 20)),
               onPressed: () async{
-                var result = await Navigator.push(context, MaterialPageRoute(builder: (context) => Scanner()));
-                setState(() {
-                  print("Result is = $result");
-                  delivered = true;
-                });
+                String result = await Navigator.push(context, MaterialPageRoute(builder: (context) => Scanner()));
+                if (result == widget.order.tokenPickup) {
+                  widget.order.state = "Picked Up";
+                } else if (result == widget.order.tokenDelivery) {
+                  widget.order.state = "Delivered";
+                }
+                api.updateOrder(widget.order);
+                setState(() { });
               }
             ),
-          ),
-          SizedBox(height: 20),
-          Text(
-            "Status: ${delivered ? "delivered" : "not delivered"}",
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 20)  
           ),
         ],
       ),
