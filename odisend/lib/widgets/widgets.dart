@@ -28,7 +28,7 @@ class OrderCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool light = AdaptiveTheme.of(context).mode == AdaptiveThemeMode.light;
-if (order.id > 2) {
+if (order.kg < 7) {
       return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
       child: Card(
@@ -44,14 +44,14 @@ if (order.id > 2) {
                       Row(
                         children: [
                           Icon(Icons.motorcycle)
-                          ,Icon(Icons.local_car_wash), Icon(Icons.pedal_bike),
+                          ,Icon(Icons.directions_car), Icon(Icons.pedal_bike),
                         ],
                       ), 
             ],
           ),
-          trailing: Text("11 KM",
+          trailing: Text(order.km.toString() + " KM\n" + order.kg.toString() + " KG",
               style:
-                  TextStyle(color: light ? Colors.black : Colors.orangeAccent)),
+                  TextStyle(color: light ? Colors.black : Colors.orangeAccent, fontWeight: FontWeight.bold)),
           onTap: () {
             Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) => OrderDetails(order)));
@@ -75,14 +75,14 @@ if (order.id > 2) {
                       Row(
                         children: [
                           Icon(Icons.motorcycle)
-                          ,Icon(Icons.local_car_wash)
+                          ,Icon(Icons.directions_car)
                         ],
                       ), 
             ],
           ),
-          trailing: Text("11 KM",
+          trailing: Text(order.km.toString() + " KM\n" + order.kg.toString() + " KG",
               style:
-                  TextStyle(color: light ? Colors.black : Colors.orangeAccent)),
+                  TextStyle(color: light ? Colors.black : Colors.orangeAccent, fontWeight: FontWeight.bold)),
           onTap: () {
             Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) => OrderDetails(order)));

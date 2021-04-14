@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:odisend/services/googleSingInProvider.dart';
+import 'package:odisend/services/preferences.dart';
 import 'package:provider/provider.dart';
 
 class AccessButton extends StatelessWidget {
-  AccessButton({String text, bool retry})
-  : this.text = text, this.retry = retry;
-
-  final String text;
-  final bool retry;
+  Preferences _prefs = Preferences();
 
   @override
   Widget build(BuildContext context) {
@@ -22,14 +19,18 @@ class AccessButton extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Image.asset("assets/images/google.png", scale: 10),
-          Text(text ?? "Sign In with Google", style: TextStyle(color: Colors.orange, fontSize: 16)),
+          Text("Sign In with Google", style: TextStyle(color: Colors.orange, fontSize: 16)),
         ],
       ),
       onPressed: () async {
         try {
           final provider = Provider.of<GoogleSignInProvider>(context, listen: false);
-          //if (retry) await provider.logOut();
-          provider.logIn();
+          bool signedIn = await _prefs.getSignedIn();
+          print("Signed in? $signedIn");
+          if (signedIn == true) {
+            await provider.logOut();
+          }
+          bool uidvalid = await provider.isUIDValid();
         } catch (e) {
           print(e);
           return;

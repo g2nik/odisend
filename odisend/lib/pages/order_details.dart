@@ -36,7 +36,7 @@ class _OrderDetailsState extends State<OrderDetails> {
 
           SizedBox(height: 30),
           Text(
-            widget.order.direction_Pickup,
+            widget.order.directionPickup,
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 30),
           ),
@@ -45,32 +45,33 @@ class _OrderDetailsState extends State<OrderDetails> {
           Divider(),
 
           SizedBox(height: 20),
-          Text(
-            "${widget.order.userId}",
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 20),
-          ),
+          // Text(
+          //   "${widget.order.userId}",
+          //   textAlign: TextAlign.center,
+          //   style: TextStyle(fontSize: 20),
+          // ),
 
           SizedBox(height: 20),
           Text(
-            "Pickup: ${widget.order.direction_Pickup}",
+            "Pickup: ${widget.order.directionPickup}",
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 20),
           ),
           SizedBox(height: 20),
           Text(
-            "Delivery: ${widget.order.direction_Delivery}",
+            "Delivery: ${widget.order.directionDelivery}",
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 20),
           ),
           SizedBox(height: MediaQuery.of(context).size.height / 40),
           Text(
-            "${widget.order.state}" ?? "N/A",
+            "State: ${widget.order.state}" ?? "N/A",
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 20),
           ),
+          SizedBox(height: 20),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 30),
+            padding: const EdgeInsets.symmetric(horizontal: 100),
             child: FlatButton(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(50),
@@ -79,12 +80,14 @@ class _OrderDetailsState extends State<OrderDetails> {
               padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 25),
               child: Text("Take order", style: TextStyle(fontSize: 20)),
               onPressed: () async {
-                api.takeOrder(widget.order, 1);
+                widget.order.state = "Assigned";
+                api.takeOrder(widget.order);
               }
             ),
           ),
+          SizedBox(height: 20),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 30),
+            padding: const EdgeInsets.symmetric(horizontal: 100),
             child: FlatButton(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(50),
@@ -101,6 +104,7 @@ class _OrderDetailsState extends State<OrderDetails> {
               }
             ),
           ),
+          SizedBox(height: 20),
           Text(
             "Status: ${delivered ? "delivered" : "not delivered"}",
             textAlign: TextAlign.center,

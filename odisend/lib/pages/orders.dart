@@ -27,10 +27,16 @@ class _OrdersState extends State<Orders> with TickerProviderStateMixin {
     _tabController = TabController(vsync: this, length: 2, initialIndex: 0);
     _loadGeneralOrders();
     _loadAssignedOrders();
+    load();
+  }
+
+  Future load() async {
+
   }
 
   Future _loadGeneralOrders() async {
     generalOrders = await api.getGeneralOrders();
+    debugPrint(generalOrders.toString());
     setState(() {});
   }
 
@@ -44,7 +50,7 @@ class _OrdersState extends State<Orders> with TickerProviderStateMixin {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text("PACKET TRACER"),
+        title: Text("ODISEND BOARD"),
         actions: [
           IconButton(
             icon: Icon(Icons.person),
@@ -53,22 +59,6 @@ class _OrdersState extends State<Orders> with TickerProviderStateMixin {
                 builder: (context) => ProfileDetails(provider: widget.googleProvider)));
             }
           ),
-          // IconButton(
-          //   icon: Icon(Icons.upload_file),
-          //   onPressed: () async {
-          //     var x = await api.tokenIsValid("Token");
-          //     print(x);
-          //     Map<String, dynamic> json =
-          //       {
-          //         "id": 2,
-          //         "name": "Nik",
-          //         "token": "Token",
-          //         "direction": "Calle de mis cojones, 33",
-          //         "mobile": 123456789,
-          //     };
-          //     api.uploadToken(2, json);
-          //   }
-          // ),
         ],
         bottom: TabBar(
           controller: _tabController,
